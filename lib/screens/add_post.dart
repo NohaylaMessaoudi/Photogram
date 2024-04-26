@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import '../backend/user_provider.dart';
 
 class AddPost extends StatefulWidget {
-  const AddPost({super.key});
+  const AddPost({super.key, required Null Function(dynamic imageUrl, dynamic caption) onPictureUploaded});
 
   @override
   State<AddPost> createState() => _AddPostState();
