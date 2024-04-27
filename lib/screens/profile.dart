@@ -8,10 +8,10 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => _ProfileState();
 }
 
-class _ProfileState extends State
-<StatefulWidget> {
+class _ProfileState extends State<StatefulWidget> {
   String _bio = "Enter your bio here";
-  String _profilePicUrl = ""; // Add URL of profile picture
+  String? _profilePicUrl; // Make _profilePicUrl nullable
+
   List<String> _uploadedPictures = []; // List to store uploaded picture URLs
   List<String> _captions = []; // List to store captions for uploaded pictures
 
@@ -23,29 +23,18 @@ class _ProfileState extends State
         children: [
           SizedBox(height: 20),
           // Profile Picture
-          CircleAvatar(
-            radius: 50,
-            backgroundImage: _profilePicUrl.isNotEmpty
-                ? NetworkImage(_profilePicUrl)
-                : AssetImage("assets/default_profile_pic.jpg") as ImageProvider,
-          ),
+          if (_profilePicUrl != null) // Check if _profilePicUrl is not null
+            CircleAvatar(
+              radius: 50,
+              backgroundImage: NetworkImage(_profilePicUrl!),
+            ),
           SizedBox(height: 10),
           // Upload Picture Section
           ElevatedButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AddPost(
-                  onPictureUploaded: (imageUrl, caption) {
-                    setState(() {
-                      _uploadedPictures.add(imageUrl);
-                      _captions.add(caption);
-                    });
-                  },
-                )),
-              );
+              _uploadProfilePic();
             },
-            child: Text("Upload Picture"),
+            child: Text("Upload Profile Picture"),
           ),
           SizedBox(height: 20),
           // Bio
@@ -78,6 +67,14 @@ class _ProfileState extends State
         ],
       ),
     );
+  }
+
+  void _uploadProfilePic() {
+    // Implement your profile picture upload logic here
+    // After successful upload, update _profilePicUrl with the URL of the uploaded picture
+    setState(() {
+      _profilePicUrl = "URL_of_uploaded_picture"; // Example URL
+    });
   }
 
   void _editBioDialog(BuildContext context) {
