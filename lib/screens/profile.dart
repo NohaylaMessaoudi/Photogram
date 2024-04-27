@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:photo_gram/screens/profile.dart';
-import 'package:photo_gram/screens/search.dart';
-import 'package:photo_gram/backend/user_provider.dart';
-import 'package:provider/provider.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
